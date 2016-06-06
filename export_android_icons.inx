@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <_name>Export android icons</_name>
+  <id>org.ekips.filter.export_android_icons</id>
+  <dependency type="executable" location="extensions">export_android_icons.py</dependency>
+  <dependency type="executable" location="extensions">inkex.py</dependency>
+
+  <param name="filename" type="string" _gui-text="File name: ">ic_</param>
+
+	<param name="radio" type="optiongroup" _gui-text="Select an option: ">
+		<_option value="mipmap">mipmap (for launcher-icons)</_option>
+		<_option value="drawable">drawable</_option>
+	</param>
+
+  <param name="directory" type="string" _gui-text="Directory: "></param>
+
+  <!-- <param name="what" type="string" _gui-text="What would you like to greet?">World</param> -->
+  <param name="ldpi" type="boolean" _gui-text="ldpi">false</param>
+  <param name="mdpi" type="boolean" _gui-text="mdpi">true</param>
+  <param name="hdpi" type="boolean" _gui-text="hdpi">true</param>
+  <param name="xhdpi" type="boolean" _gui-text="xhdpi">true</param>
+  <param name="xxhdpi" type="boolean" _gui-text="xxhdpi">true</param>
+  <param name="xxxhdpi" type="boolean" _gui-text="xxxhdpi">true</param>
+  <param name="web" type="boolean" _gui-text="web">false</param>
+
+  <effect needs-live-preview="false">
+    <object-type>all</object-type>
+    <effects-menu>
+       <submenu _name="Export"/>
+    </effects-menu>
+  </effect>
+  <script>
+    <command reldir="extensions" interpreter="python">export_android_icons.py</command>
+  </script>
+</inkscape-extension>
