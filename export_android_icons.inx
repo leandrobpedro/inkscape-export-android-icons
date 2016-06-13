@@ -6,22 +6,26 @@
   <dependency type="executable" location="extensions">inkex.py</dependency>
 
   <param name="filename" type="string" _gui-text="File name: ">ic_</param>
-
-	<param name="radio" type="optiongroup" _gui-text="Select an option: ">
-		<_option value="mipmap">mipmap (for launcher-icons)</_option>
-		<_option value="drawable">drawable</_option>
-	</param>
-
+  <param name="radio" type="optiongroup" _gui-text="Select an option: ">
+    <_option value="mipmap">mipmap (for launcher-icons)</_option>
+    <_option value="drawable">drawable</_option>
+  </param>
   <param name="directory" type="string" _gui-text="Directory: "></param>
 
-  <!-- <param name="what" type="string" _gui-text="What would you like to greet?">World</param> -->
-  <param name="ldpi" type="boolean" _gui-text="ldpi">false</param>
-  <param name="mdpi" type="boolean" _gui-text="mdpi">true</param>
-  <param name="hdpi" type="boolean" _gui-text="hdpi">true</param>
-  <param name="xhdpi" type="boolean" _gui-text="xhdpi">true</param>
-  <param name="xxhdpi" type="boolean" _gui-text="xxhdpi">true</param>
-  <param name="xxxhdpi" type="boolean" _gui-text="xxxhdpi">true</param>
-  <param name="web" type="boolean" _gui-text="web">false</param>
+  <!-- <param name="name" type="notebook">
+    <page name="page_1" gui-text="Qualifiers "> -->
+      <param name="ldpi" type="boolean" _gui-text="ldpi">false</param>
+      <param name="mdpi" type="boolean" _gui-text="mdpi">true</param>
+      <param name="hdpi" type="boolean" _gui-text="hdpi">true</param>
+      <param name="xhdpi" type="boolean" _gui-text="xhdpi">true</param>
+      <param name="xxhdpi" type="boolean" _gui-text="xxhdpi">true</param>
+      <param name="xxxhdpi" type="boolean" _gui-text="xxxhdpi">true</param>
+      <param name="web" type="boolean" _gui-text="web">false</param>
+    <!-- </page>
+    <page name="page_2" gui-text="OptiPNG options ">
+      <param name="optlevel" type="int" min="0" max="7" gui-text="Optimization level">1</param>
+    </page>
+  </param> -->
 
   <effect needs-live-preview="false">
     <object-type>all</object-type>
