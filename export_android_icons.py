@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 import inkex
 import sys
 import optparse
@@ -6,22 +6,25 @@ import os
 import subprocess
 
 try:
-  from subprocess import DEVNULL
+    from subprocess import DEVNULL
 except ImportError:
-  DEVNULL = open(os.devnull, 'w')
+    DEVNULL = open(os.devnull, 'w')
 
 class SizeGroup(optparse.OptionGroup):
     def add_size_option(self, name, size, dpi):
-        self.add_option('--%s' % name, action='callback', type='string', dest='sizes',
-                callback=append_size, callback_args=(name, size, dpi))
+        self.add_option('--%s' % name, action='callback',
+                        type='string', dest='sizes',
+                        callback=append_size, callback_args=(name, size, dpi))
 
 class ExportAndroidIcons(inkex.Effect):
-
     def __init__(self):
         inkex.Effect.__init__(self)
-        self.OptionParser.add_option('--filename', action='store', type='string', dest='filename')
-        self.OptionParser.add_option('--directory', action='store',type='string', dest='directory')
-        self.OptionParser.add_option('--radio', action='store', type='string', dest='radio')
+        self.OptionParser.add_option('--filename', action='store',
+                                    type='string', dest='filename')
+        self.OptionParser.add_option('--directory', action='store',
+                                    type='string', dest='directory')
+        self.OptionParser.add_option('--radio', action='store',
+                                    type='string', dest='radio')
 
         group = SizeGroup(self.OptionParser, '')
         group.add_size_option('ldpi', 32, 67.5)
@@ -49,7 +52,7 @@ def str_to_bool(s):
     if s.lower() == 'true':
          return True
     elif s.lower() == 'false':
-         return False
+        return False
 
 def create_folder(path):
     if not os.path.exists(path):
@@ -74,23 +77,24 @@ def export(options, svg):
     if not options.sizes:
         error('Please, select at least one option to export.')
 
-    for qualifier, size, dpi in options.sizes:
+    for (qualifier, size, dpi) in options.sizes:
         # For web icons, do not use subfolder, create on directory root.
-        subfolder = '%s-%s' % (options.radio, qualifier) if qualifier != 'web' else ''
+        subfolder = ('%s-%s' % (options.radio, qualifier)
+            if qualifier != 'web' else '')
         path = '%s\%s' % (options.directory, subfolder)
         png = path + '\%s.png' % options.filename
 
         # Size base icons for mipmap, and dpi for drawable.
-        opt, val = ('width', size) if (options.radio == 'mipmap') else ('dpi', dpi)
+        opt, val = (('width', size)
+            if (options.radio == 'mipmap') else ('dpi', dpi))
 
-        create_folder(path);
+        create_folder(path)
 
-        subprocess.check_call([
-                'inkscape',
-                '--export-area-page',
-                '--export-%s=%s' % (opt, val),
-                '--export-png=%s' % png,
-                svg])
+        subprocess.check_call(['inkscape',
+                                '--export-area-page',
+                                '--export-%s=%s' % (opt, val),
+                                '--export-png=%s' % png,
+                                svg])
 
 effect = ExportAndroidIcons()
 effect.affect()
