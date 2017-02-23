@@ -4,6 +4,7 @@ import sys
 import optparse
 import os
 import subprocess
+from sys import platform as _plataform
 
 try:
     from subprocess import DEVNULL
@@ -81,8 +82,10 @@ def export(options, svg):
         # For web icons, do not use subfolder, create on directory root.
         subfolder = ('%s-%s' % (options.radio, qualifier)
             if qualifier != 'web' else '')
-        path = '%s\%s' % (options.directory, subfolder)
-        png = path + '\%s.png' % options.filename
+
+        separator = ('\\' if _plataform.startswith('win') else '/')
+        path = '%s%s%s' % (options.directory, separator, subfolder)
+        png = path + '%s%s.png' % (separator, options.filename)
 
         # Size base icons for mipmap, and dpi for drawable.
         opt, val = (('width', size)
